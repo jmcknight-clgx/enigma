@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="rotors/rotor1.json" />
+    <EmbeddedResource Include="rotors/rotor2.json" />
+    <EmbeddedResource Include="rotors/rotor3.json" />
+    <EmbeddedResource Include="rotors/rotor4.json" />
+    <EmbeddedResource Include="rotors/rotor5.json" />
+    <EmbeddedResource Include="rotors/rotor6.json" />
+    <EmbeddedResource Include="rotors/rotor7.json" />
+    <EmbeddedResource Include="rotors/rotor8.json" />
+    <EmbeddedResource Include="reflectors/ukw-b.json" />
+    <EmbeddedResource Include="reflectors/ukw-c.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="6.0.2" />
+  </ItemGroup>
+
+</Project>

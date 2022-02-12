@@ -1,0 +1,8 @@
+bin/
+obj/
+*/wwwroot/app/
+.DS_Store
+npm-debug.log
+*/wwwroot/lib/
+*/package-lock.json
+.fake
