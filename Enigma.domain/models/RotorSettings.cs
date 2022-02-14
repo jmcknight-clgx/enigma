@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Enigma.domain.dtos
+namespace Enigma.domain.models
 {
     public class RotorSettings
     {

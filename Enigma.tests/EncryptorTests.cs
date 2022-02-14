@@ -1,5 +1,5 @@
 using Enigma.domain;
-using Enigma.domain.dtos;
+using Enigma.domain.models;
 using Xunit;
 
 namespace Enigma.tests;
@@ -7,11 +7,11 @@ namespace Enigma.tests;
 public class EncryptorTests
 {
     [Fact]
-    public void Test1()
+    public void Encryptor_Encrypt_()
     {
         var target = defaultTarget();
-        var result = target.Encrypt("A");
-        Assert.Equal("U", result);
+        var result = target.Encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        Assert.Equal("BJELRQZVJWARXSNBXORSTNCFME", result);
     }
 
     private Encryptor defaultTarget() => new Encryptor(GetSettings(Rotors.III, 'A', 'A'),
