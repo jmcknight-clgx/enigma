@@ -36,17 +36,26 @@ namespace Enigma.domain
                 // TODO: plugboard
                 //rotor rotors
                 bool shouldMoveNextRotor = true;
+                int previousPartialRotations = 0;
                 foreach( Rotor r in rotors)
                 {
                     if (shouldMoveNextRotor) 
                         shouldMoveNextRotor = r.MoveRotorAndShouldMoveNext();
                 }
                 // pass through rotors
-                foreach(Rotor r in this.rotors) c = r.GetNext(c);
+                foreach (Rotor r in this.rotors)
+                {
+                    c = r.GetNext(c, previousPartialRotations);
+                    previousPartialRotations = r.PartialRotations;
+                }
                 // refect back to rotors
                 c = this.reflector.Get(c);
                 // pass through the rotors in reverse
-                foreach(Rotor r in this.reverseRotors) c = r.GetReverse(c);
+                foreach (Rotor r in this.reverseRotors)
+                {
+                    previousPartialRotations = r.PartialRotations;
+                    c = r.GetReverse(c, previousPartialRotations);
+                }
 
 
                 return c;
