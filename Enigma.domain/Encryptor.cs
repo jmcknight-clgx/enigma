@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Text.Json;
+using Enigma.domain.extensions;
 using Enigma.domain.models;
 
 namespace Enigma.domain
@@ -46,14 +47,14 @@ namespace Enigma.domain
                 foreach (Rotor r in this.rotors)
                 {
                     c = r.GetNext(c, previousPartialRotations);
-                    previousPartialRotations = r.PartialRotations;
+                    previousPartialRotations = r.CurrentSetting.offset();
                 }
                 // refect back to rotors
                 c = this.reflector.Get(c);
                 // pass through the rotors in reverse
                 foreach (Rotor r in this.reverseRotors)
                 {
-                    previousPartialRotations = r.PartialRotations;
+                    previousPartialRotations = r.CurrentSetting.offset();
                     c = r.GetReverse(c, previousPartialRotations);
                 }
 
