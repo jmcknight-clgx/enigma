@@ -14,7 +14,8 @@ namespace Enigma.domain.models
         {
             using Stream stream = Rotor.GetStream();
             var RotorDto = JsonSerializer.Deserialize<Rotor>(stream);
-            RotorDto.CurrentSetting = CurrentValue;
+            RotorDto.CurrentSetting = this.CurrentValue;
+            RotorDto.RingSetting = this.RingSetting;
             return RotorDto;
         }
     }
