@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Enigma.domain;
 using Enigma.domain.models;
 using Xunit;
@@ -9,9 +10,30 @@ public class EncryptorTests
     [Fact]
     public void Encryptor_Encrypt_()
     {
-        var target = defaultTarget();
+        var target = new Encryptor(GetSettings(Rotors.III, 'A', 'A'),
+            GetSettings(Rotors.II, 'A', 'A'),
+            GetSettings(Rotors.I, 'A', 'A'), Reflectors.B,
+            new Dictionary<char, char>());
         var result = target.Encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         Assert.Equal("BJELRQZVJWARXSNBXORSTNCFME", result);
+    }
+
+    [Fact]
+    public void Encryptor_Encrypt_PlugboardSettings()
+    {
+        var target = new Encryptor(GetSettings(Rotors.III, 'A', 'A'),
+            GetSettings(Rotors.II, 'A', 'A'),
+            GetSettings(Rotors.I, 'A', 'A'), Reflectors.B,
+            new Dictionary<char, char>
+            {
+                {'A', 'B'},
+                {'C', 'D'},
+                {'E', 'F'},
+                {'G', 'H'},
+                {'I', 'J'}
+            });
+        var result = target.Encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        Assert.Equal("BCIAHNTLJUBRXSNAXORSTNDEMF", result);
     }
 
     [Fact]
@@ -19,7 +41,8 @@ public class EncryptorTests
     {
         var target = new Encryptor(GetSettings(Rotors.III, 'B', 'A'),
             GetSettings(Rotors.II, 'A', 'A'),
-            GetSettings(Rotors.I, 'A', 'A'), Reflectors.B);
+            GetSettings(Rotors.I, 'A', 'A'), Reflectors.B,
+            new Dictionary<char, char>());
         var result = target.Encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         Assert.Equal("DLBINDLTUSCEROVRHSTUAITILN", result);
     }
@@ -29,7 +52,8 @@ public class EncryptorTests
     {
         var target = new Encryptor(GetSettings(Rotors.III, 'A', 'B'),
             GetSettings(Rotors.II, 'A', 'A'),
-            GetSettings(Rotors.I, 'A', 'A'), Reflectors.B);
+            GetSettings(Rotors.I, 'A', 'A'), Reflectors.B,
+            new Dictionary<char, char>());
         var result = target.Encrypt("ABCDE");
         Assert.Equal("UARJW", result);
     }
@@ -39,14 +63,29 @@ public class EncryptorTests
     {
         var target = new Encryptor(GetSettings(Rotors.III, 'C', 'D'),
             GetSettings(Rotors.II, 'A', 'A'),
-            GetSettings(Rotors.I, 'A', 'A'), Reflectors.B);
+            GetSettings(Rotors.I, 'A', 'A'), Reflectors.B,
+            new Dictionary<char, char>());
         var result = target.Encrypt("HELLOWORLD");
         Assert.Equal("ZFEBMQKNGR", result);
     }
 
-    private Encryptor defaultTarget() => new Encryptor(GetSettings(Rotors.III, 'A', 'A'),
-        GetSettings(Rotors.II, 'A', 'A'),
-        GetSettings(Rotors.I, 'A', 'A'), Reflectors.B);
+    // [Fact]
+    // public void Encryptor_Encrypt_Rotor345RefecltorCWithPlugboardSettings()
+    // {
+    //     var target = new Encryptor(GetSettings(Rotors.V, 'F', 'G'),
+    //         GetSettings(Rotors.IV, 'H', 'I'),
+    //         GetSettings(Rotors.III, 'J', 'K'), Reflectors.C,
+    //         new Dictionary<char, char>
+    //         {
+    //             {'A', 'B'},
+    //             {'C', 'D'},
+    //             {'E', 'F'},
+    //             {'G', 'H'},
+    //             {'I', 'J'}
+    //         });
+    //     var result = target.Encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    //     Assert.Equal("IDQOODLMMZJJFFVOADNPXSWDTC", result);
+    // }
 
     private RotorSettings GetSettings(Rotors rotors, char initialValue, char ringSetting) => new RotorSettings
     {

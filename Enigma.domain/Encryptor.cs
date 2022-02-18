@@ -11,9 +11,10 @@ namespace Enigma.domain
         private List<Rotor> rotors;
         private List<Rotor> reverseRotors;
         private Reflector reflector;
+        private Dictionary<Char, Char> plugboard;
         
         // Gear1 is right rotor which rotates first
-        public Encryptor(RotorSettings Gear1, RotorSettings Gear2, RotorSettings Gear3, Reflectors reflector)
+        public Encryptor(RotorSettings Gear1, RotorSettings Gear2, RotorSettings Gear3, Reflectors reflector, Dictionary<Char, Char> plugboard)
         {
             this.rotors = new List<Rotor>{
                 Gear1.SetupRotor(),
@@ -27,6 +28,12 @@ namespace Enigma.domain
                 rotors[1],
                 rotors[0]
             };
+            // needs validation map all values to the reverse as well
+            this.plugboard = plugboard;
+            foreach( char c in this.plugboard.Keys.ToList())
+            {
+                this.plugboard.Add(this.plugboard[c], c);
+            }
         }
 
         public string Encrypt(string text) 
@@ -43,6 +50,8 @@ namespace Enigma.domain
                     if (shouldMoveNextRotor) 
                         shouldMoveNextRotor = r.MoveRotorAndShouldMoveNext();
                 }
+                // input to plugboard
+                if (plugboard.ContainsKey(c)) c = plugboard[c];
                 // pass through rotors
                 foreach (Rotor r in this.rotors)
                 {
@@ -57,10 +66,11 @@ namespace Enigma.domain
                     previousPartialRotations = r.CurrentSetting.offset();
                     c = r.GetReverse(c, previousPartialRotations);
                 }
-
+                // output to plugboard
+                if (plugboard.ContainsKey(c)) c = plugboard[c];
 
                 return c;
-            }).ToArray();
+            }).ToArray(); 
             return new String(charArray);
         }
     }

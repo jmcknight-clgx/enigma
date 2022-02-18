@@ -11,20 +11,19 @@ namespace Enigma.domain.models
         public List<char> Turnover { get; set; }
         public char CurrentSetting { get; set; }
         public char RingSetting { get; set; }
-        //TODO: RingSettings
-        //public char GetNext(char input) => getOffsetCharacter(Map[input]);
+
         public char GetNext(char input, int rotationalOffest) 
         {
             int value = input.offset() + CurrentSetting.offset() - rotationalOffest - this.RingSetting.offset();
             value = value.Normalize();
             return (char)(this.Map.ElementAt(value).Value.offset() + this.RingSetting.offset() %26 + 65);
         }
-        //public char GetReverse(char input) => Map.First(x => x.Value == getNegativeOffsetCharacter(input)).Key;
+
         public char GetReverse(char input, int rotationalOffset){
             int value = Map.First(x => x.Value == (input.offset() + rotationalOffset - this.RingSetting.offset()) % 26 + 65).Key.offset() - CurrentSetting.offset() + this.RingSetting.offset();
             value = value.Normalize();
             return this.Map.ElementAt(value).Key;
-            return (char)(this.Map.ElementAt(value).Key.offset() + this.RingSetting.offset() % 26 + 65);
+            //return (char)(this.Map.ElementAt(value).Key.offset() + this.RingSetting.offset() % 26 + 65);
         } 
 
         public bool MoveRotorAndShouldMoveNext()
@@ -33,10 +32,6 @@ namespace Enigma.domain.models
             CurrentSetting = CurrentSetting.GetNextCharacter();
             return shouldMoveNextRoror;
         }
-
-        private char getOffsetCharacter(char c) => c.GetCharacterWithOffset(this.CurrentSetting.offset());
-        private char getNegativeOffsetCharacter(char c) => c.GetCharacterWithOffset(-this.CurrentSetting.offset());
-
         
     }
 }
