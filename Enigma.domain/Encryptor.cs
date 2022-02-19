@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Enigma.domain.extensions;
 using Enigma.domain.models;
 
@@ -44,7 +42,6 @@ namespace Enigma.domain
                 // TODO: plugboard
                 //rotor rotors
                 bool shouldMoveNextRotor = true;
-                int previousPartialRotations = 0;
                 foreach( Rotor r in rotors)
                 {
                     if (shouldMoveNextRotor) 
@@ -55,16 +52,18 @@ namespace Enigma.domain
                 // pass through rotors
                 foreach (Rotor r in this.rotors)
                 {
-                    c = r.GetNext(c, previousPartialRotations);
-                    previousPartialRotations = r.CurrentSetting.offset();
+                    c = r.TraversePinContact(c)
+                        .Pipe(i => r.TraverseWiring(i))
+                        .Pipe(i => r.TraversePlateContact(i));
                 }
                 // refect back to rotors
                 c = this.reflector.Get(c);
                 // pass through the rotors in reverse
                 foreach (Rotor r in this.reverseRotors)
                 {
-                    previousPartialRotations = r.CurrentSetting.offset();
-                    c = r.GetReverse(c, previousPartialRotations);
+                    c = r.ReversePlateContact(c)
+                        .Pipe(i => r.ReverseWiring(i))
+                        .Pipe(i => r.ReversePinContact(i));
                 }
                 // output to plugboard
                 if (plugboard.ContainsKey(c)) c = plugboard[c];

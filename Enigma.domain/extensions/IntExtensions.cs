@@ -8,4 +8,7 @@ public static class IntExtensions
         if (value >= 26) return value - 26;
         return value;
     }
+
+    public static char GetLetterFromOffset(this int offset) =>
+        (char) (offset + 65);
 }

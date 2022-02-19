@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Enigma.domain.extensions
 {
     public static class CharExtensions
