@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigma.domain", "Enigma.dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigma.tests", "Enigma.tests\Enigma.tests.csproj", "{66C2566A-B971-47E6-B1CB-1DEC2125B3E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigma.solvers", "Enigma.solvers\Enigma.solvers.csproj", "{9CC23130-F24D-4849-A526-5CEC37465B74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{66C2566A-B971-47E6-B1CB-1DEC2125B3E2}.Release|x64.Build.0 = Release|Any CPU
 		{66C2566A-B971-47E6-B1CB-1DEC2125B3E2}.Release|x86.ActiveCfg = Release|Any CPU
 		{66C2566A-B971-47E6-B1CB-1DEC2125B3E2}.Release|x86.Build.0 = Release|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Debug|x64.Build.0 = Debug|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Debug|x86.Build.0 = Debug|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Release|x64.ActiveCfg = Release|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Release|x64.Build.0 = Release|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Release|x86.ActiveCfg = Release|Any CPU
+		{9CC23130-F24D-4849-A526-5CEC37465B74}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

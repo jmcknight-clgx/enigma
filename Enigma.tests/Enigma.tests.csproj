@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Enigma.domain\Enigma.domain.csproj" />
     <ProjectReference Include="..\Enigma.console\Enigma.console.csproj" />
+    <ProjectReference Include="..\Enigma.solvers\Enigma.solvers.csproj" />
   </ItemGroup>
 
 </Project>

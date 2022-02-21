@@ -8,7 +8,7 @@ namespace Enigma.tests;
 public class EncryptorTests
 {
     [Fact]
-    public void Encryptor_Encrypt_()
+    public void Encryptor_Encrypt_Rotor123BasicTest()
     {
         var target = new Encryptor(GetSettings(Rotors.III, 'A', 'A'),
             GetSettings(Rotors.II, 'A', 'A'),
@@ -69,23 +69,45 @@ public class EncryptorTests
         Assert.Equal("ZFEBMQKNGR", result);
     }
 
-    // [Fact]
-    // public void Encryptor_Encrypt_Rotor345RefecltorCWithPlugboardSettings()
-    // {
-    //     var target = new Encryptor(GetSettings(Rotors.V, 'F', 'G'),
-    //         GetSettings(Rotors.IV, 'H', 'I'),
-    //         GetSettings(Rotors.III, 'J', 'K'), Reflectors.C,
-    //         new Dictionary<char, char>
-    //         {
-    //             {'A', 'B'},
-    //             {'C', 'D'},
-    //             {'E', 'F'},
-    //             {'G', 'H'},
-    //             {'I', 'J'}
-    //         });
-    //     var result = target.Encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    //     Assert.Equal("IDQOODLMMZJJFFVOADNPXSWDTC", result);
-    // }
+    [Fact]
+    public void Encryptor_Encrypt_Rotor345BasicTest()
+    {
+        var target = new Encryptor(GetSettings(Rotors.V, 'A', 'A'),
+            GetSettings(Rotors.IV, 'A', 'A'),
+            GetSettings(Rotors.III, 'A', 'A'), Reflectors.B,
+            new Dictionary<char, char>());
+        var result = target.Encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        Assert.Equal("HTBTVMVABMJJTMYUHPARRYVHZO", result);
+    }
+
+    [Fact]
+    public void Encryptor_Encrypt_ReflectorCBasicTest()
+    {
+        var target = new Encryptor(GetSettings(Rotors.V, 'A', 'A'),
+            GetSettings(Rotors.IV, 'A', 'A'),
+            GetSettings(Rotors.III, 'A', 'A'), Reflectors.C,
+            new Dictionary<char, char>());
+        var result = target.Encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        Assert.Equal("IRUJPJXBPPLTKTKCNBESZEPBRS", result);
+    }
+
+    [Fact]
+    public void Encryptor_Encrypt_Rotor345RefecltorCWithPlugboardSettings()
+    {
+        var target = new Encryptor(GetSettings(Rotors.V, 'F', 'G'),
+            GetSettings(Rotors.IV, 'H', 'I'),
+            GetSettings(Rotors.III, 'J', 'K'), Reflectors.C,
+            new Dictionary<char, char>
+            {
+                {'A', 'B'},
+                {'C', 'D'},
+                {'E', 'F'},
+                {'G', 'H'},
+                {'I', 'J'}
+            });
+        var result = target.Encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        Assert.Equal("HCXZIWCFGTBPJTQCMGCSGXBKRM", result);
+    }
 
     private RotorSettings GetSettings(Rotors rotors, char initialValue, char ringSetting) => new RotorSettings
     {

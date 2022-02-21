@@ -39,7 +39,6 @@ namespace Enigma.domain
             var charArray = text.ToCharArray();
             // deal with rotor and reflectors pathway
             charArray = charArray.Select(c => {
-                // TODO: plugboard
                 //rotor rotors
                 bool shouldMoveNextRotor = true;
                 foreach( Rotor r in rotors)
